@@ -8,23 +8,23 @@
 </head>
 
   <script>
-    // Nom unique pour ton site (tu peux modifier)
+    // Identifiants uniques pour ton compteur
     const namespace = "dguedj_portfolio";
     const key = "visites";
 
-    // URL CountAPI
-    const url = `https://api.countapi.xyz/update/${namespace}/${key}/?amount=1`;
+    // URL CountAPI (hit = crée + incrémente)
+    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
 
-    // Récupération et affichage
     fetch(url)
-        .then(response => response.json())
+        .then(r => r.json())
         .then(data => {
             document.getElementById("views-counter").textContent = data.value;
         })
-        .catch(error => {
-            document.getElementById("views-counter").textContent = "Erreur";
+        .catch(() => {
+            document.getElementById("views-counter").textContent = "0";
         });
 </script>
+
 
 <body>
 
@@ -75,6 +75,11 @@
     Vues : <span id="views-counter"></span>
     </div>
 
+    <div style="font-size:18px; margin:10px 0;">
+    Vues : <span id="views-counter">...</span>
+    </div>
+
+
     
 
   <!-- Footer -->
@@ -87,6 +92,7 @@
 
 </body>
 </html>
+
 
 
 
