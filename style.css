@@ -16,7 +16,6 @@ header {
   text-align: center;
 }
 
-
 header nav a {
   color: white;
   margin: 0 15px;
@@ -56,9 +55,10 @@ footer {
 .slideshow-container {
   position: relative;
   max-width: 700px;
-  margin: auto;
+  margin: 40px auto; /* espacement plus uniforme */
   border-radius: 10px;
   overflow: hidden;
+  background: #000; /* pour éviter espace vide si image transparente */
 }
 
 .slide {
@@ -67,7 +67,10 @@ footer {
 
 .slide img {
   width: 100%;
+  height: auto; /* éviter déformation des images */
   border-radius: 10px;
+  display: block;
+  object-fit: cover; /* garde l'image proportionnelle */
 }
 
 /* Boutons précédent / suivant */
@@ -84,6 +87,7 @@ footer {
   background: rgba(0,0,0,0.4);
   border-radius: 5px;
   transition: background 0.3s ease;
+  z-index: 10;
 }
 
 .prev:hover, .next:hover {
@@ -95,10 +99,20 @@ footer {
 
 /* Animation fade */
 .fade {
-  animation: fadeEffect 1s;
+  animation: fadeEffect 1s ease;
 }
 
 @keyframes fadeEffect {
-  from {opacity: 0.4}
-  to {opacity: 1}
+  from {opacity: 0.4;}
+  to {opacity: 1;}
+}
+
+/* ===== Slider Genève spécifique (optionnel) ===== */
+.slideshow-container[data-slider="2"] {
+  max-width: 600px; /* plus petit que New-York si tu veux */
+  border: 2px solid #0077b6; /* bord bleu pour Genève */
+}
+
+.slideshow-container[data-slider="2"] .slide img {
+  border-radius: 15px; /* coins plus arrondis */
 }
