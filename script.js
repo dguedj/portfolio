@@ -44,3 +44,11 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+const countEl = document.getElementById('count');
+fetch('https://api.countapi.xyz/update/ton-namespace/ta-page/?amount=1')
+  .then(res => res.json())
+  .then(res => {
+    countEl.innerHTML = res.value;
+  });
+
