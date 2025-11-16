@@ -55,10 +55,10 @@ footer {
 .slideshow-container {
   position: relative;
   max-width: 700px;
-  margin: 40px auto; /* espacement plus uniforme */
+  margin: 40px auto;
   border-radius: 10px;
   overflow: hidden;
-  background: #000; /* pour éviter espace vide si image transparente */
+  background: #000;
 }
 
 .slide {
@@ -67,13 +67,13 @@ footer {
 
 .slide img {
   width: 100%;
-  height: auto; /* éviter déformation des images */
+  height: auto;
   border-radius: 10px;
   display: block;
-  object-fit: cover; /* garde l'image proportionnelle */
+  object-fit: cover;
 }
 
-/* Boutons précédent / suivant */
+/* Boutons */
 .prev, .next {
   cursor: pointer;
   position: absolute;
@@ -83,10 +83,8 @@ footer {
   color: white;
   font-weight: bold;
   font-size: 24px;
-  user-select: none;
   background: rgba(0,0,0,0.4);
   border-radius: 5px;
-  transition: background 0.3s ease;
   z-index: 10;
 }
 
@@ -107,12 +105,12 @@ footer {
   to {opacity: 1;}
 }
 
-/* ===== Slider Genève spécifique (optionnel) ===== */
+/* Genève slider spécifique */
 .slideshow-container[data-slider="2"] {
-  max-width: 600px; /* plus petit que New-York si tu veux */
-  border: 2px solid #0077b6; /* bord bleu pour Genève */
+  max-width: 600px;
+  border: 2px solid #0077b6;
 }
 
 .slideshow-container[data-slider="2"] .slide img {
-  border-radius: 15px; /* coins plus arrondis */
+  border-radius: 15px;
 }
