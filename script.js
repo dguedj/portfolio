@@ -1,19 +1,16 @@
 /* ===== Sliders multiples ===== */
-const sliders = {}; // Stocke l'index de chaque slider
+const sliders = {};
 
-// Affiche une slide pour un slider spécifique
 function showSlides(sliderContainer, n) {
   const slides = sliderContainer.querySelectorAll('.slide');
 
-  // Initialise l'index si nécessaire
   if (!sliders[sliderContainer.dataset.slider]) {
     sliders[sliderContainer.dataset.slider] = 1;
   }
 
   let index = sliders[sliderContainer.dataset.slider];
-  if (n !== undefined) {
-    index += n;
-  }
+
+  if (n !== undefined) index += n;
 
   if (index > slides.length) index = 1;
   if (index < 1) index = slides.length;
@@ -24,15 +21,13 @@ function showSlides(sliderContainer, n) {
   sliders[sliderContainer.dataset.slider] = index;
 }
 
-// Boutons précédent / suivant
-function plusSlides(el, n) {
-  const sliderContainer = el.closest('.slideshow-container');
+function plusSlides(btn, n) {
+  const sliderContainer = btn.closest('.slideshow-container');
   showSlides(sliderContainer, n);
 }
 
-// Initialisation de tous les sliders au chargement
 document.querySelectorAll('.slideshow-container').forEach(slider => {
-  showSlides(slider); // Affiche la première image
+  showSlides(slider);
 });
 
 /* ===== Animation au scroll ===== */
