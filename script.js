@@ -1,22 +1,39 @@
-/* ===== Slider 10 images ===== */
-let slideIndex = 1;
-showSlides(slideIndex);
+/* ===== Sliders multiples ===== */
+const sliders = {}; // Stocke l'index de chaque slider
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+// Affiche une slide pour un slider spécifique
+function showSlides(sliderContainer, n) {
+  const slides = sliderContainer.querySelectorAll('.slide');
 
-function showSlides(n) {
-  let slides = document.getElementsByClassName("slide");
-  if (n > slides.length) { slideIndex = 1; }
-  if (n < 1) { slideIndex = slides.length; }
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+  // Initialise l'index si nécessaire
+  if (!sliders[sliderContainer.dataset.slider]) {
+    sliders[sliderContainer.dataset.slider] = 1;
   }
 
-  slides[slideIndex - 1].style.display = "block";
+  let index = sliders[sliderContainer.dataset.slider];
+  if (n !== undefined) {
+    index += n;
+  }
+
+  if (index > slides.length) index = 1;
+  if (index < 1) index = slides.length;
+
+  slides.forEach(slide => slide.style.display = 'none');
+  slides[index - 1].style.display = 'block';
+
+  sliders[sliderContainer.dataset.slider] = index;
 }
+
+// Boutons précédent / suivant
+function plusSlides(el, n) {
+  const sliderContainer = el.closest('.slideshow-container');
+  showSlides(sliderContainer, n);
+}
+
+// Initialisation de tous les sliders au chargement
+document.querySelectorAll('.slideshow-container').forEach(slider => {
+  showSlides(slider); // Affiche la première image
+});
 
 /* ===== Animation au scroll ===== */
 const sections = document.querySelectorAll('.section-animated');
