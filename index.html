@@ -6,6 +6,26 @@
   <title>Mon Portfolio Animé</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
+  <script>
+    // Nom unique pour ton site (tu peux modifier)
+    const namespace = "dguedj_portfolio";
+    const key = "visites";
+
+    // URL CountAPI
+    const url = `https://api.countapi.xyz/update/${namespace}/${key}/?amount=1`;
+
+    // Récupération et affichage
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("views-counter").textContent = data.value;
+        })
+        .catch(error => {
+            document.getElementById("views-counter").textContent = "Erreur";
+        });
+</script>
+
 <body>
 
   <!-- Header -->
@@ -51,6 +71,12 @@
 
   </section>
 
+    <div style="font-size:18px; margin:10px 0;">
+    Vues : <span id="views-counter">...</span>
+    </div>
+
+    
+
   <!-- Footer -->
   <footer>
     <p>© 2025 deborahgdj</p>
@@ -61,4 +87,5 @@
 
 </body>
 </html>
+
 
