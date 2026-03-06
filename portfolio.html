@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mes voyages</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <h1 class="logo">Mes Voyages</h1>
+  <nav>
+    <ul class="menu">
+      <li onclick="showCountry('Taglit')">Taglit</li>
+      <li onclick="showCountry('NYC')">NYC</li>
+      <li onclick="showCountry('Egypt')">Egypt</li>
+      <li onclick="showCountry('Greece')">Greece</li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <section id="Taglit" class="gallery">
+    <img src="taglit/photo1.jpg" alt="photo">
+    <img src="taglit/photo2.jpg" alt="photo">
+    <img src="taglit/photo5.jpg" alt="photo">
+    <img src="taglit/photo6.jpg" alt="photo">
+    <img src="taglit/photo7.jpg" alt="photo">
+    <img src="taglit/photo8.jpg" alt="photo">
+    <img src="taglit/photo9.jpg" alt="photo">
+    <img src="taglit/photo10.jpg" alt="photo">
+    <img src="taglit/photo11.jpg" alt="photo">
+    <img src="taglit/photo12.jpg" alt="photo">
+    <img src="taglit/photo13.jpg" alt="photo">
+    <img src="taglit/photo14.jpg" alt="photo">
+
+  </section>
+
+  <section id="Egypt" class="gallery">
+    <img src="egypt/photo1.jpg" alt="photo">
+    <img src="egypt/photo2.jpg" alt="photo">
+
+  </section>
+
+  <section id="NYC" class="gallery">
+    <img src="nyc/image1.jpg" alt="photo">
+    <img src="nyc/image2.jpg" alt="photo">
+    <img src="nyc/image3.jpg" alt="photo">
+    <img src="nyc/image4.jpg" alt="photo">
+    <img src="nyc/image5.jpg" alt="photo">
+    <img src="nyc/image6.jpg" alt="photo">
+    <img src="nyc/image7.jpg" alt="photo">
+    <img src="nyc/image8.jpg" alt="photo">
+    <img src="nyc/image9.jpg" alt="photo">
+    <img src="nyc/image10.jpg" alt="photo">
+    <img src="nyc/image11.jpg" alt="photo">
+    <img src="nyc/image12.jpg" alt="photo">
+    <img src="nyc/image13.jpg" alt="photo"> 
+    <img src="nyc/image14.jpg" alt="photo">
+    <img src="nyc/image15.jpg" alt="photo">
+    <img src="nyc/image16.jpg" alt="photo">
+    <img src="nyc/image17.jpg" alt="photo">
+    <img src="nyc/image18.jpg" alt="photo">
+
+  </section>
+
+  <section id="Greece" class="gallery">
+    <img src="greece/photo1.jpg" alt="photo">
+    <img src="greece/photo2.jpg" alt="photo">
+    <img src="greece/photo3.jpg" alt="photo">
+
+  </section>
+
+</div>
+
+<div id="overlay" onclick="hideOverlay()">
+  <img id="overlay-img" src="" alt="photo">
+</div>
+
+
+<script src="script.js"></script>
+<link rel="stylesheet" href="portfolio.css">
+</body>
+</html>
