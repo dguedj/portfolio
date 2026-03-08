@@ -17,29 +17,29 @@ function showCountry(country) {
   document.getElementById(country).classList.add("active");
 
   // activer le bouton du menu
-  let activeItem = document.querySelector(`.menu li[onclick="showCountry('${country}')"]`);
-  if(activeItem){
-    activeItem.classList.add("active");
-  }
+  document.querySelector(`.menu li[onclick="showCountry('${country}')"]`)
+    .classList.add("active");
 }
 
-
-
 /* Zoom image */
+function addImageZoom() {
+  let galleryImages = document.querySelectorAll(".gallery img");
+  galleryImages.forEach(img => {
+    img.addEventListener("click", function() {
+      document.getElementById("overlay").style.display = "flex";
+      document.getElementById("overlay-img").src = this.src;
+    });
+  });
+}
 
 function hideOverlay() {
   document.getElementById("overlay").style.display = "none";
 }
 
-
-/* slideshow */
-
 let slides = document.querySelectorAll(".slide");
 let index = 0;
 
 function nextSlide() {
-
-  if(slides.length === 0) return;
 
   slides[index].classList.remove("active");
 
@@ -52,17 +52,4 @@ function nextSlide() {
   slides[index].classList.add("active");
 
 }
-
-setInterval(nextSlide, 3000); // toutes les 3 secondes
-
-
-/* système de note */
-
-function rate(score){
-
-  document.getElementById("rating-result").innerText =
-  "Merci ! Vous avez donné la note de " + score + "/10";
-
-}
-
 
