@@ -24,30 +24,6 @@ function showCountry(country) {
 }
 
 
-/* génération des images */
-
-function generateImages(sectionId, start, end) {
-
-  const gallery = document.getElementById(sectionId);
-
-  for (let i = start; i <= end; i++) {
-
-    const img = document.createElement("img");
-    img.src = `dataset/image${i}.jpg`;
-    img.alt = "photo";
-
-    // zoom image
-    img.addEventListener("click", function() {
-
-      document.getElementById("overlay").style.display = "flex";
-      document.getElementById("overlay-img").src = this.src;
-
-    });
-
-    gallery.appendChild(img);
-  }
-}
-
 
 /* Zoom image */
 
@@ -90,10 +66,3 @@ function rate(score){
 }
 
 
-/* génération des galeries */
-
-generateImages("NYC", 1, 18);
-generateImages("Geneve", 19, 22);
-generateImages("Greece", 23, 25);
-generateImages("Egypt", 26, 29);
-generateImages("Taglit", 30, 41);
