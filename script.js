@@ -53,3 +53,15 @@ function nextSlide() {
 
 }
 
+function showOverlay(src) {
+
+  document.getElementById("overlay").style.display = "flex";
+  document.getElementById("overlay-img").src = src;
+
+}
+
+function hideOverlay() {
+
+  document.getElementById("overlay").style.display = "none";
+
+}
