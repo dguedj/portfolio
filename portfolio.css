@@ -12,7 +12,6 @@ body {
   background: #1e4fa3;
   color: white;
   padding: 15px 30px;
-  animation: floatNavbar 3s ease-in-out infinite;
 }
 
 .logo {
