@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-weight: 300;
+      background-color: #ffb6c1; /* ou ton dégradé */
+      color: #050000;
+      overflow-x: hidden;
+    }
+
+    .intro {
+        text-align: center;
+        font-style: italic;
+        color: #090224;
+        max-width: 600px;   
+        margin: 20px auto;
+        line-height: 1;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      display: flex;
+      justify-content: flex-end;
+      padding: 30px 60px;
+      z-index: 1000;
+      transition: 0.3s;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar a {
+      margin-left: 40px;
+      text-decoration: none;
+      color: #6b6b6b;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #000;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      background-image: url("C:/Users/debor/Documents/Portfolio/dataset/background.jpg"); /* ton image */
+      background-size: cover;       /* prend tout l'écran */
+      background-position: center;  /* centre l'image */
+      background-repeat: no-repeat;
+
+      color: white; /* texte visible sur image */
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: normal;
+      margin-bottom: 30px;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 20px;
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    .tabs a {
+      padding: 12px 30px;
+      background-color: #e8dcd2;
+      border-radius: 40px;
+      text-decoration: none;
+      color: #2e2e2e;
+      transition: 0.3s;
+    }
+
+    .tabs a:hover {
+      background-color: #d8c7ba;
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 120px 60px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 40px;
+    }
+
+    /* GALERIE */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .lightbox-content {
+      display: block;
+      margin: auto;
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    /* ANIMATION */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 768px) {
+      h1 {
+        font-size: 48px;
+      }
+
+      .navbar {
+        padding: 20px;
+      }
+
+      .section {
+        padding: 80px 20px;
+      }
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: #e8cce8;
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      animation: fadeUp 1.1s ease forwards;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar" id="navbar">
+    <a href="#taglit">Taglit</a>
+    <a href="#ny">New-York</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Mon Portfolio</h1>
+     <p class="intro">
+    Ce portfolio n’est pas seulement une collection de travaux, c’est une traversée. 
+    Durant ces voyages j’ai rencontré des défis. Ceux qui ralentissent, qui remettent en question,
+    ceux qui obligent à regarder autrement, à recommencer, encore et encore. 
+    Si vous prenez le temps de parcourir ces pages, peut-être y trouverez-vous un écho 
+    — quelque chose de familier, ou au contraire, d’inattendu.
+
+
+  </p>
+
+    <div class="tabs">
+      <a href="#taglit">Taglit</a>
+      <a href="#ny">New-York</a>
+    </div>
+  </section>
+
+<!-- TAGLIT -->
+  <section class="section" id="taglit">
+    <h2>Taglit</h2>
+    <div class="gallery-grid">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image30.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image31.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image32.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image33.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image34.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image35.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image36.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image37.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image38.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image39.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image40.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image41.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image42.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- NEW YORK -->
+  <section class="section" id="ny">
+    <h2>New-York</h2>
+    <div class="gallery-grid">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image1.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image2.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image3.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image4.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image5.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image6.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image7.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image8.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image9.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image10.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image11.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image12.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image13.jpg" alt="">
+      <img src="C:\Users\debor\Documents\Portfolio\dataset\image14.jpg" alt=""
+    </div>
+  </section> 
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Navbar scroll effect
+    window.addEventListener("scroll", function() {
+      const navbar = document.getElementById("navbar");
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Lightbox
+    const images = document.querySelectorAll(".gallery-grid img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.querySelector(".close");
+
+    images.forEach(img => {
+      img.addEventListener("click", () => {
+        lightbox.style.display = "block";
+        lightboxImg.src = img.src;
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target !== lightboxImg) {
+        lightbox.style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>
