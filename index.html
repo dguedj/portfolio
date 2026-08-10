@@ -230,6 +230,20 @@
   <div class="navbar" id="navbar">
     <a href="#taglit" class="titre-animation">Taglit</a>
     <a href="#ny" class="titre-animation">New-York</a>
+    <audio id="musique" autoplay loop muted>
+      <source src="musique.mp3" type="audio/mpeg">
+    </audio>
+
+<button onclick="toggleSon()">🔊 Activer le son</button>
+
+<script>
+function toggleSon() {
+  const musique = document.getElementById('musique');
+  musique.muted = !musique.muted;
+  if (!musique.muted) musique.play();
+}
+</script>
+    
   </div>
 
   <!-- HERO -->
