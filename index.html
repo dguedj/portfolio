@@ -328,8 +328,45 @@
     <img class="lightbox-content" id="lightbox-img">
   </div>
 
-  <!-- ===== SCRIPTS ===== -->
+ <!-- ===== SCRIPTS ===== -->
   <script>
+    // --- Diaporama défilant en fond du hero ---
+    // Liste des images à faire défiler : ajoute/retire des chemins ici pour changer le diaporama
+    const heroImages = [
+      "dataset/image31.jpg",
+      "dataset/image32.jpg",
+      "dataset/image33.jpg",
+      "dataset/image34.jpg",
+      "dataset/image35.jpg",
+      "dataset/image36.jpg",
+      "dataset/image37.jpg",
+      "dataset/image38.jpg",
+      "dataset/image39.jpg",
+      "dataset/image40.jpg",
+      "dataset/image41.jpg",
+      "dataset/image42.jpg"
+
+    ];
+
+    const slideshowContainer = document.getElementById("hero-slideshow");
+
+    // Création d'une <div> par image, avec l'image en background-image
+    heroImages.forEach((src, index) => {
+      const slide = document.createElement("div");
+      slide.className = "hero-slide" + (index === 0 ? " active" : ""); // la 1ère image démarre visible
+      slide.style.backgroundImage = `url('${src}')`;
+      slideshowContainer.appendChild(slide);
+    });
+
+    // Changement d'image toutes les 4 secondes
+    let currentSlide = 0;
+    setInterval(() => {
+      const slides = document.querySelectorAll(".hero-slide");
+      slides[currentSlide].classList.remove("active");           // on cache l'image actuelle
+      currentSlide = (currentSlide + 1) % slides.length;          // on passe à la suivante (boucle)
+      slides[currentSlide].classList.add("active");               // on affiche la nouvelle
+    }, 4000);
+
     // --- Effet de fond flouté sur la navbar au scroll ---
     window.addEventListener("scroll", function () {
       const navbar = document.getElementById("navbar");
