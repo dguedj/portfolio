@@ -4,7 +4,11 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Déborah Guedj</title>
 
@@ -142,6 +146,25 @@
 
 
         /* ==================================================
+           LECTEUR YOUTUBE INVISIBLE
+        ================================================== */
+
+        #youtube-player {
+            position: fixed;
+
+            width: 1px;
+            height: 1px;
+
+            left: -9999px;
+            top: -9999px;
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+
+        /* ==================================================
            ACCUEIL
         ================================================== */
 
@@ -215,6 +238,7 @@
             padding: 120px 60px;
 
             display: flex;
+
             justify-content: center;
             align-items: center;
 
@@ -248,6 +272,7 @@
 
         .cv-buttons {
             display: flex;
+
             justify-content: center;
 
             gap: 15px;
@@ -402,6 +427,7 @@
             height: 45px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -455,6 +481,7 @@
             height: 100%;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -549,6 +576,7 @@
             height: 50px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -845,7 +873,8 @@
                 <button
                     id="music-button"
                     type="button"
-                    aria-label="Lecture ou pause de la musique">
+                    aria-label="Lecture ou pause de la musique"
+                    title="Lecture / Pause">
 
                     <span class="music-icon">
                         ♫
@@ -1016,11 +1045,7 @@
                     alt="Photo 4">
 
 
-                <!--
-                    Copie de la première image.
-                    Elle permet une boucle fluide :
-                    1 → 2 → 3 → 4 → 1
-                -->
+                <!-- Copie de la première image -->
 
                 <img
                     src="image1.webp"
@@ -1144,16 +1169,19 @@
 
 
     <!-- ==================================================
-         MUSIQUE
+         LECTEUR YOUTUBE INVISIBLE
     ================================================== -->
 
-    <iframe
-    src="https://www.youtube.com/embed/GoLerKmXQhU?autoplay=1"
-    width="560"
-    height="315"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-</iframe>
+    <div id="youtube-player"></div>
+
+
+    <!-- ==================================================
+         API YOUTUBE
+    ================================================== -->
+
+    <script
+        src="https://www.youtube.com/iframe_api">
+    </script>
 
 
     <!-- ==================================================
@@ -1164,40 +1192,165 @@
 
 
         /* ==================================================
-           MUSIQUE
+           MUSIQUE YOUTUBE
         ================================================== */
 
-        const music =
-            document.getElementById("background-music");
+        let youtubePlayer = null;
 
+        let isMusicPlaying = false;
+
+
+        /*
+            Cette fonction est automatiquement appelée
+            par l'API YouTube lorsque celle-ci est chargée.
+        */
+
+        function onYouTubeIframeAPIReady() {
+
+            youtubePlayer = new YT.Player(
+                "youtube-player",
+                {
+
+                    videoId: "NPBCbTZWnq0",
+
+                    playerVars: {
+
+                        autoplay: 0,
+
+                        controls: 0,
+
+                        loop: 1,
+
+                        playlist: "NPBCbTZWnq0",
+
+                        rel: 0
+
+                    },
+
+                    events: {
+
+                        onReady: function () {
+
+                            console.log(
+                                "Lecteur YouTube prêt."
+                            );
+
+                        },
+
+
+                        onStateChange:
+                            function (event) {
+
+                                /*
+                                    La musique joue.
+                                */
+
+                                if (
+                                    event.data ===
+                                    YT.PlayerState.PLAYING
+                                ) {
+
+                                    isMusicPlaying = true;
+
+                                    musicIcon.textContent =
+                                        "♫";
+
+                                    musicButton.classList.add(
+                                        "playing"
+                                    );
+
+                                }
+
+
+                                /*
+                                    La musique est arrêtée
+                                    ou mise en pause.
+                                */
+
+                                if (
+                                    event.data ===
+                                    YT.PlayerState.PAUSED ||
+                                    event.data ===
+                                    YT.PlayerState.ENDED
+                                ) {
+
+                                    isMusicPlaying = false;
+
+                                    musicIcon.textContent =
+                                        "🔇";
+
+                                    musicButton.classList.remove(
+                                        "playing"
+                                    );
+
+                                }
+
+                            }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ==================================================
+           BOUTON MUSIQUE
+        ================================================== */
 
         const musicButton =
-            document.getElementById("music-button");
+            document.getElementById(
+                "music-button"
+            );
 
 
         const musicIcon =
-            musicButton.querySelector(".music-icon");
+            musicButton.querySelector(
+                ".music-icon"
+            );
 
 
         musicButton.addEventListener(
             "click",
             function () {
 
-                if (music.paused) {
+                /*
+                    Vérifie que le lecteur YouTube
+                    est prêt.
+                */
 
-                    music.play();
+                if (!youtubePlayer) {
 
-                    musicIcon.textContent = "♫";
+                    console.log(
+                        "Le lecteur YouTube n'est pas encore prêt."
+                    );
 
-                    musicButton.classList.add("playing");
+                    return;
 
-                } else {
+                }
 
-                    music.pause();
 
-                    musicIcon.textContent = "🔇";
+                /*
+                    Si la musique joue :
+                    → pause.
+                */
 
-                    musicButton.classList.remove("playing");
+                if (isMusicPlaying) {
+
+                    youtubePlayer.pauseVideo();
+
+                }
+
+
+                /*
+                    Sinon :
+                    → lecture.
+                */
+
+                else {
+
+                    youtubePlayer.playVideo();
 
                 }
 
@@ -1210,19 +1363,27 @@
         ================================================== */
 
         const slides =
-            document.querySelectorAll(".slide");
+            document.querySelectorAll(
+                ".slide"
+            );
 
 
         const carouselTrack =
-            document.getElementById("carousel-track");
+            document.getElementById(
+                "carousel-track"
+            );
 
 
         const previousButton =
-            document.getElementById("previous-button");
+            document.getElementById(
+                "previous-button"
+            );
 
 
         const nextButton =
-            document.getElementById("next-button");
+            document.getElementById(
+                "next-button"
+            );
 
 
         let currentSlide = 0;
@@ -1255,15 +1416,13 @@
 
 
             /*
-                La dernière image est une copie
-                de la première.
-
-                On l'affiche normalement,
-                puis on revient instantanément
-                à la vraie première image.
+                Dernière image = copie de la première.
             */
 
-            if (currentSlide === slides.length - 1) {
+            if (
+                currentSlide ===
+                slides.length - 1
+            ) {
 
                 setTimeout(
                     function () {
@@ -1292,7 +1451,9 @@
                     800
                 );
 
-            } else {
+            }
+
+            else {
 
                 setTimeout(
                     function () {
@@ -1348,7 +1509,7 @@
 
 
         /* --------------------------------------------------
-           BOUTONS
+           BOUTONS CARROUSEL
         -------------------------------------------------- */
 
         nextButton.addEventListener(
@@ -1382,23 +1543,33 @@
         ================================================== */
 
         const lightbox =
-            document.getElementById("lightbox");
+            document.getElementById(
+                "lightbox"
+            );
 
 
         const lightboxImage =
-            document.getElementById("lightbox-image");
+            document.getElementById(
+                "lightbox-image"
+            );
 
 
         const lightboxClose =
-            document.getElementById("lightbox-close");
+            document.getElementById(
+                "lightbox-close"
+            );
 
 
         const lightboxPrevious =
-            document.getElementById("lightbox-previous");
+            document.getElementById(
+                "lightbox-previous"
+            );
 
 
         const lightboxNext =
-            document.getElementById("lightbox-next");
+            document.getElementById(
+                "lightbox-next"
+            );
 
 
         let lightboxSlide = 0;
@@ -1413,10 +1584,13 @@
 
                 /*
                     La dernière image est uniquement
-                    la copie utilisée par le carrousel.
+                    la copie utilisée pour la boucle.
                 */
 
-                if (index >= slides.length - 1) {
+                if (
+                    index >=
+                    slides.length - 1
+                ) {
                     return;
                 }
 
@@ -1429,7 +1603,9 @@
 
                         updateLightbox();
 
-                        lightbox.classList.add("active");
+                        lightbox.classList.add(
+                            "active"
+                        );
 
                     }
                 );
@@ -1439,7 +1615,7 @@
 
 
         /* --------------------------------------------------
-           METTRE À JOUR L'IMAGE AGRANDIE
+           METTRE À JOUR L'IMAGE
         -------------------------------------------------- */
 
         function updateLightbox() {
@@ -1518,7 +1694,9 @@
 
         function closeLightbox() {
 
-            lightbox.classList.remove("active");
+            lightbox.classList.remove(
+                "active"
+            );
 
         }
 
@@ -1557,15 +1735,27 @@
             "keydown",
             function (event) {
 
-                if (event.key === "Escape") {
+                /*
+                    Fermer avec Échap.
+                */
+
+                if (
+                    event.key === "Escape"
+                ) {
 
                     closeLightbox();
 
                 }
 
 
+                /*
+                    Image suivante.
+                */
+
                 if (
-                    lightbox.classList.contains("active") &&
+                    lightbox.classList.contains(
+                        "active"
+                    ) &&
                     event.key === "ArrowRight"
                 ) {
 
@@ -1574,8 +1764,14 @@
                 }
 
 
+                /*
+                    Image précédente.
+                */
+
                 if (
-                    lightbox.classList.contains("active") &&
+                    lightbox.classList.contains(
+                        "active"
+                    ) &&
                     event.key === "ArrowLeft"
                 ) {
 
@@ -1588,7 +1784,7 @@
 
     </script>
 
+
 </body>
 
 </html>
-
