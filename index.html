@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Déborah Guedj</title>
+
+
+    <style>
+
+        /* ==================================================
+           RESET
+        ================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            background: #E8D3C5;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* ==================================================
+           TITRES
+        ================================================== */
+
+        h1 {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-weight: normal;
+            font-size: 50px;
+        }
+
+
+        /* ==================================================
+           NAVIGATION
+        ================================================== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 60px;
+
+            background: #e4dede;
+            backdrop-filter: blur(12px);
+
+            z-index: 1000;
+        }
+
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+
+            list-style: none;
+
+            margin-left: auto;
+        }
+
+
+        .nav-links a {
+            color: rgb(13, 1, 54);
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            transition: opacity 0.3s ease;
+        }
+
+
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+
+
+        /* ==================================================
+           BOUTON MUSIQUE
+        ================================================== */
+
+        #music-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 42px;
+            height: 42px;
+
+            padding: 0;
+
+            background: rgb(255, 252, 252);
+
+            border: 1px solid rgb(13, 1, 54);
+            border-radius: 50%;
+
+            color: rgb(13, 1, 54);
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+
+        #music-button:hover {
+            background: rgb(13, 1, 54);
+            color: white;
+
+            transform: scale(1.08);
+        }
+
+
+        #music-button.playing {
+            background: rgb(13, 1, 54);
+            color: white;
+        }
+
+
+        /* ==================================================
+           ACCUEIL
+        ================================================== */
+
+        #accueil {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 100px 20px 50px;
+        }
+
+
+        #accueil h1 {
+            font-size: clamp(45px, 8vw, 100px);
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ==================================================
+           ANIMATION DES TEXTES
+        ================================================== */
+
+        .animate {
+            opacity: 0;
+
+            transform: translateY(50px);
+
+            animation: slideUp 1s ease forwards;
+        }
+
+
+        .delay-1 {
+            animation-delay: 0.3s;
+        }
+
+
+        .delay-2 {
+            animation-delay: 0.6s;
+        }
+
+
+        @keyframes slideUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ==================================================
+           CV
+        ================================================== */
+
+        #cv {
+            min-height: 100vh;
+
+            padding: 120px 60px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+
+        .cv-container {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+
+        .cv-container h1 {
+            margin-bottom: 20px;
+        }
+
+
+        .cv-container p {
+            color: rgb(13, 1, 54);
+
+            font-size: 17px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ==================================================
+           BOUTONS CV
+        ================================================== */
+
+        .cv-buttons {
+            display: flex;
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-bottom: 40px;
+        }
+
+
+        .cv-button {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            background: rgb(13, 1, 54);
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 30px;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .cv-button:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.85;
+        }
+
+
+        .cv-button-secondary {
+            background: transparent;
+
+            color: rgb(13, 1, 54);
+
+            border: 1px solid rgb(13, 1, 54);
+        }
+
+
+        /* ==================================================
+           APERÇU DU CV
+        ================================================== */
+
+        .cv-preview {
+            width: 100%;
+            height: 700px;
+
+            background: white;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .cv-preview iframe {
+            width: 100%;
+            height: 100%;
+
+            border: none;
+        }
+
+
+        /* ==================================================
+           GALERIE
+        ================================================== */
+
+        #galerie {
+            min-height: 100vh;
+
+            padding: 120px 60px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        #galerie h1 {
+            margin-bottom: 50px;
+        }
+
+
+        /* ==================================================
+           CARROUSEL
+        ================================================== */
+
+        .carousel {
+            position: relative;
+
+            width: 100%;
+            max-width: 900px;
+
+            height: 500px;
+
+            margin: 0 auto;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+        }
+
+
+        .carousel-track {
+            display: flex;
+
+            width: 100%;
+            height: 100%;
+
+            transition:
+                transform 0.8s ease-in-out;
+        }
+
+
+        .slide {
+            flex: 0 0 100%;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s ease;
+        }
+
+
+        .slide:hover {
+            transform: scale(1.02);
+        }
+
+
+        /* ==================================================
+           BOUTONS CARROUSEL
+        ================================================== */
+
+        .carousel-button {
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.8);
+
+            color: rgb(13, 1, 54);
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .carousel-button:hover {
+            background: white;
+
+            transform:
+                translateY(-50%)
+                scale(1.08);
+        }
+
+
+        .carousel-button.previous {
+            left: 20px;
+        }
+
+
+        .carousel-button.next {
+            right: 20px;
+        }
+
+
+        /* ==================================================
+           LIGHTBOX
+        ================================================== */
+
+        .lightbox {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px;
+
+            background: rgba(0, 0, 0, 0.88);
+
+            z-index: 2000;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
+
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.5);
+
+            transform: scale(0.9);
+
+            transition:
+                transform 0.3s ease;
+        }
+
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+
+        /* ==================================================
+           BOUTON FERMER LIGHTBOX
+        ================================================== */
+
+        .lightbox-close {
+            position: absolute;
+
+            top: 25px;
+            right: 35px;
+
+            background: none;
+            border: none;
+
+            color: white;
+
+            font-size: 45px;
+            font-weight: 300;
+
+            cursor: pointer;
+
+            z-index: 2001;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+
+        .lightbox-close:hover {
+            transform: scale(1.15);
+        }
+
+
+        /* ==================================================
+           BOUTONS LIGHTBOX
+        ================================================== */
+
+        .lightbox-button {
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.85);
+
+            color: rgb(13, 1, 54);
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            z-index: 2001;
+
+            transition: all 0.3s ease;
+        }
+
+
+        .lightbox-button:hover {
+            background: white;
+
+            transform:
+                translateY(-50%)
+                scale(1.08);
+        }
+
+
+        .lightbox-button.previous {
+            left: 25px;
+        }
+
+
+        .lightbox-button.next {
+            right: 25px;
+        }
+
+
+        /* ==================================================
+           MES PROJETS
+        ================================================== */
+
+        #mes-projets {
+            min-height: 100vh;
+
+            padding: 120px 60px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+
+        #mes-projets a {
+            color: rgb(13, 1, 54);
+
+            font-size: 18px;
+
+            text-decoration: none;
+        }
+
+
+        #mes-projets a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ==================================================
+           CONTACT
+        ================================================== */
+
+        #contact {
+            min-height: 60vh;
+
+            padding: 120px 60px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+        }
+
+
+        #contact a {
+            color: rgb(13, 1, 54);
+
+            font-size: 20px;
+
+            text-decoration: none;
+        }
+
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        footer {
+            padding: 30px;
+
+            text-align: center;
+
+            color: #11032d;
+
+            border-top: 1px solid #390445;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+                gap: 15px;
+            }
+
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+
+            #cv,
+            #galerie,
+            #mes-projets,
+            #contact {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+
+            #cv h1,
+            #galerie h1,
+            #mes-projets h1,
+            #contact h1 {
+                font-size: 40px;
+            }
+
+
+            /* ---------- CV ---------- */
+
+            .cv-buttons {
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .cv-button {
+                width: 220px;
+            }
+
+
+            .cv-preview {
+                height: 500px;
+            }
+
+
+            /* ---------- CARROUSEL ---------- */
+
+            .carousel {
+                height: 400px;
+            }
+
+
+            .carousel-button {
+                width: 38px;
+                height: 38px;
+
+                font-size: 20px;
+            }
+
+
+            .carousel-button.previous {
+                left: 10px;
+            }
+
+
+            .carousel-button.next {
+                right: 10px;
+            }
+
+
+            /* ---------- LIGHTBOX ---------- */
+
+            .lightbox {
+                padding: 20px;
+            }
+
+
+            .lightbox img {
+                max-width: 95%;
+                max-height: 85%;
+            }
+
+
+            .lightbox-button {
+                width: 40px;
+                height: 40px;
+
+                font-size: 22px;
+            }
+
+
+            .lightbox-button.previous {
+                left: 10px;
+            }
+
+
+            .lightbox-button.next {
+                right: 10px;
+            }
+
+
+            .lightbox-close {
+                top: 15px;
+                right: 20px;
+
+                font-size: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVIGATION
+    ================================================== -->
+
+    <nav>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="#accueil">
+                    Accueil
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#cv">
+                    Mon CV
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#mes-projets">
+                    Mes Projets
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#galerie">
+                    Galerie
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#contact">
+                    Contact
+                </a>
+            </li>
+
+
+            <li>
+
+                <button
+                    id="music-button"
+                    type="button"
+                    aria-label="Lecture ou pause de la musique">
+
+                    <span class="music-icon">
+                        ♫
+                    </span>
+
+                </button>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ==================================================
+         ACCUEIL
+    ================================================== -->
+
+    <section id="accueil">
+
+        <h1 class="animate">
+            Déborah Guedj
+        </h1>
+
+    </section>
+
+
+    <!-- ==================================================
+         MON CV
+    ================================================== -->
+
+    <section id="cv">
+
+        <div class="cv-container">
+
+            <h1>
+                Mon CV
+            </h1>
+
+
+            <p>
+                Découvrez mon parcours, mes compétences
+                et mes expériences professionnelles.
+            </p>
+
+
+            <div class="cv-buttons">
+
+                <a
+                    href="CV_Deborah_Guedj_20072026.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="cv-button">
+
+                    Voir mon CV
+
+                </a>
+
+
+                <a
+                    href="CV_Deborah_Guedj_20072026.pdf"
+                    download
+                    class="cv-button cv-button-secondary">
+
+                    Télécharger mon CV
+
+                </a>
+
+            </div>
+
+
+            <div class="cv-preview">
+
+                <iframe
+                    src="CV_Deborah_Guedj_20072026.pdf"
+                    title="CV de Déborah Guedj">
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         MES PROJETS
+    ================================================== -->
+
+    <section id="mes-projets">
+
+        <div class="animate delay-1">
+
+            <h1>
+                Mes Projets
+            </h1>
+
+
+            <a
+                href="https://github.com/dguedj"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                Mon Github
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         GALERIE
+    ================================================== -->
+
+    <section id="galerie">
+
+        <h1>
+            Galerie
+        </h1>
+
+
+        <div class="carousel">
+
+
+            <!-- Flèche précédente -->
+
+            <button
+                class="carousel-button previous"
+                id="previous-button"
+                type="button"
+                aria-label="Photo précédente">
+
+                ‹
+
+            </button>
+
+
+            <!-- Images -->
+
+            <div
+                class="carousel-track"
+                id="carousel-track">
+
+
+                <img
+                    src="image1.webp"
+                    class="slide"
+                    alt="Photo 1">
+
+
+                <img
+                    src="image2.webp"
+                    class="slide"
+                    alt="Photo 2">
+
+
+                <img
+                    src="image3.webp"
+                    class="slide"
+                    alt="Photo 3">
+
+
+                <img
+                    src="image4.webp"
+                    class="slide"
+                    alt="Photo 4">
+
+
+                <!--
+                    Copie de la première image.
+                    Elle permet une boucle fluide :
+                    1 → 2 → 3 → 4 → 1
+                -->
+
+                <img
+                    src="image1.webp"
+                    class="slide"
+                    alt="Photo 1">
+
+            </div>
+
+
+            <!-- Flèche suivante -->
+
+            <button
+                class="carousel-button next"
+                id="next-button"
+                type="button"
+                aria-label="Photo suivante">
+
+                ›
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         LIGHTBOX
+    ================================================== -->
+
+    <div
+        class="lightbox"
+        id="lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image agrandie">
+
+
+        <!-- Fermer -->
+
+        <button
+            class="lightbox-close"
+            id="lightbox-close"
+            type="button"
+            aria-label="Fermer">
+
+            ×
+
+        </button>
+
+
+        <!-- Photo précédente -->
+
+        <button
+            class="lightbox-button previous"
+            id="lightbox-previous"
+            type="button"
+            aria-label="Photo précédente">
+
+            ‹
+
+        </button>
+
+
+        <!-- Image agrandie -->
+
+        <img
+            id="lightbox-image"
+            src=""
+            alt="">
+
+
+        <!-- Photo suivante -->
+
+        <button
+            class="lightbox-button next"
+            id="lightbox-next"
+            type="button"
+            aria-label="Photo suivante">
+
+            ›
+
+        </button>
+
+    </div>
+
+
+    <!-- ==================================================
+         CONTACT
+    ================================================== -->
+
+    <section id="contact">
+
+        <div class="animate delay-1">
+
+            <h1>
+                Contact
+            </h1>
+
+
+            <a href="mailto:deborahgj22@gmail.com">
+
+                Me contacter
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer>
+
+        © 2026 — Déborah Guedj
+
+    </footer>
+
+
+    <!-- ==================================================
+         MUSIQUE
+    ================================================== -->
+
+    <iframe
+    src="https://www.youtube.com/embed/GoLerKmXQhU?autoplay=1"
+    width="560"
+    height="315"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+</iframe>
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+
+        /* ==================================================
+           MUSIQUE
+        ================================================== */
+
+        const music =
+            document.getElementById("background-music");
+
+
+        const musicButton =
+            document.getElementById("music-button");
+
+
+        const musicIcon =
+            musicButton.querySelector(".music-icon");
+
+
+        musicButton.addEventListener(
+            "click",
+            function () {
+
+                if (music.paused) {
+
+                    music.play();
+
+                    musicIcon.textContent = "♫";
+
+                    musicButton.classList.add("playing");
+
+                } else {
+
+                    music.pause();
+
+                    musicIcon.textContent = "🔇";
+
+                    musicButton.classList.remove("playing");
+
+                }
+
+            }
+        );
+
+
+        /* ==================================================
+           CARROUSEL
+        ================================================== */
+
+        const slides =
+            document.querySelectorAll(".slide");
+
+
+        const carouselTrack =
+            document.getElementById("carousel-track");
+
+
+        const previousButton =
+            document.getElementById("previous-button");
+
+
+        const nextButton =
+            document.getElementById("next-button");
+
+
+        let currentSlide = 0;
+
+        let isMoving = false;
+
+
+        /* --------------------------------------------------
+           PHOTO SUIVANTE
+        -------------------------------------------------- */
+
+        function nextSlide() {
+
+            if (isMoving) {
+                return;
+            }
+
+
+            isMoving = true;
+
+            currentSlide++;
+
+
+            carouselTrack.style.transition =
+                "transform 0.8s ease-in-out";
+
+
+            carouselTrack.style.transform =
+                `translateX(-${currentSlide * 100}%)`;
+
+
+            /*
+                La dernière image est une copie
+                de la première.
+
+                On l'affiche normalement,
+                puis on revient instantanément
+                à la vraie première image.
+            */
+
+            if (currentSlide === slides.length - 1) {
+
+                setTimeout(
+                    function () {
+
+                        carouselTrack.style.transition =
+                            "none";
+
+
+                        currentSlide = 0;
+
+
+                        carouselTrack.style.transform =
+                            "translateX(0)";
+
+
+                        carouselTrack.offsetHeight;
+
+
+                        carouselTrack.style.transition =
+                            "transform 0.8s ease-in-out";
+
+
+                        isMoving = false;
+
+                    },
+                    800
+                );
+
+            } else {
+
+                setTimeout(
+                    function () {
+
+                        isMoving = false;
+
+                    },
+                    800
+                );
+
+            }
+
+        }
+
+
+        /* --------------------------------------------------
+           PHOTO PRÉCÉDENTE
+        -------------------------------------------------- */
+
+        function previousSlide() {
+
+            if (
+                isMoving ||
+                currentSlide === 0
+            ) {
+                return;
+            }
+
+
+            isMoving = true;
+
+            currentSlide--;
+
+
+            carouselTrack.style.transition =
+                "transform 0.8s ease-in-out";
+
+
+            carouselTrack.style.transform =
+                `translateX(-${currentSlide * 100}%)`;
+
+
+            setTimeout(
+                function () {
+
+                    isMoving = false;
+
+                },
+                800
+            );
+
+        }
+
+
+        /* --------------------------------------------------
+           BOUTONS
+        -------------------------------------------------- */
+
+        nextButton.addEventListener(
+            "click",
+            nextSlide
+        );
+
+
+        previousButton.addEventListener(
+            "click",
+            previousSlide
+        );
+
+
+        /* --------------------------------------------------
+           DÉFILEMENT AUTOMATIQUE
+        -------------------------------------------------- */
+
+        setInterval(
+            function () {
+
+                nextSlide();
+
+            },
+            4000
+        );
+
+
+        /* ==================================================
+           LIGHTBOX
+        ================================================== */
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+
+        const lightboxImage =
+            document.getElementById("lightbox-image");
+
+
+        const lightboxClose =
+            document.getElementById("lightbox-close");
+
+
+        const lightboxPrevious =
+            document.getElementById("lightbox-previous");
+
+
+        const lightboxNext =
+            document.getElementById("lightbox-next");
+
+
+        let lightboxSlide = 0;
+
+
+        /* --------------------------------------------------
+           OUVRIR UNE IMAGE
+        -------------------------------------------------- */
+
+        slides.forEach(
+            function (slide, index) {
+
+                /*
+                    La dernière image est uniquement
+                    la copie utilisée par le carrousel.
+                */
+
+                if (index >= slides.length - 1) {
+                    return;
+                }
+
+
+                slide.addEventListener(
+                    "click",
+                    function () {
+
+                        lightboxSlide = index;
+
+                        updateLightbox();
+
+                        lightbox.classList.add("active");
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* --------------------------------------------------
+           METTRE À JOUR L'IMAGE AGRANDIE
+        -------------------------------------------------- */
+
+        function updateLightbox() {
+
+            lightboxImage.src =
+                slides[lightboxSlide].src;
+
+
+            lightboxImage.alt =
+                slides[lightboxSlide].alt;
+
+        }
+
+
+        /* --------------------------------------------------
+           PHOTO SUIVANTE LIGHTBOX
+        -------------------------------------------------- */
+
+        lightboxNext.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+
+                lightboxSlide++;
+
+
+                if (
+                    lightboxSlide >=
+                    slides.length - 1
+                ) {
+
+                    lightboxSlide = 0;
+
+                }
+
+
+                updateLightbox();
+
+            }
+        );
+
+
+        /* --------------------------------------------------
+           PHOTO PRÉCÉDENTE LIGHTBOX
+        -------------------------------------------------- */
+
+        lightboxPrevious.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+
+                lightboxSlide--;
+
+
+                if (lightboxSlide < 0) {
+
+                    lightboxSlide =
+                        slides.length - 2;
+
+                }
+
+
+                updateLightbox();
+
+            }
+        );
+
+
+        /* --------------------------------------------------
+           FERMER LIGHTBOX
+        -------------------------------------------------- */
+
+        function closeLightbox() {
+
+            lightbox.classList.remove("active");
+
+        }
+
+
+        lightboxClose.addEventListener(
+            "click",
+            closeLightbox
+        );
+
+
+        /* --------------------------------------------------
+           FERMER EN CLIQUANT SUR LE FOND
+        -------------------------------------------------- */
+
+        lightbox.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === lightbox
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        /* --------------------------------------------------
+           NAVIGATION AU CLAVIER
+        -------------------------------------------------- */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    closeLightbox();
+
+                }
+
+
+                if (
+                    lightbox.classList.contains("active") &&
+                    event.key === "ArrowRight"
+                ) {
+
+                    lightboxNext.click();
+
+                }
+
+
+                if (
+                    lightbox.classList.contains("active") &&
+                    event.key === "ArrowLeft"
+                ) {
+
+                    lightboxPrevious.click();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+
