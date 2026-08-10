@@ -2,29 +2,14 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <style>
-  .titre-animation {
-    animation: monterTexte 1.5s ease-out forwards;
-    position: relative;
-  }
-  
-  @keyframes monterTexte {
-    from {
-      transform: translateY(100px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  </style>
-  <title class="titre-animation">Mon Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio</title>
 
-  <!-- Google Fonts -->
+  <!-- Polices Google Fonts : Playfair Display pour les titres, Inter pour le texte -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    /* Reset de base : supprime les marges/paddings par défaut du navigateur */
     * {
       margin: 0;
       padding: 0;
@@ -35,41 +20,61 @@
       font-family: 'Inter', sans-serif;
       font-style: italic;
       font-weight: 300;
-      background-color: #ffb6c1; /* ou ton dégradé */
+      background-color: #ffb6c1;
       color: #050000;
-      overflow-x: hidden;
+      overflow-x: hidden; /* évite le scroll horizontal parasite */
+    }
+
+    /* ===== ANIMATION DU TITRE (bas -> haut) ===== */
+    .titre-animation {
+      position: relative;
+      animation: monterTexte 1.5s ease-out forwards;
+      /* "forwards" garde le texte visible à la fin de l'animation */
+    }
+
+    @keyframes monterTexte {
+      from {
+        transform: translateY(100px); /* part 100px plus bas */
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .intro {
-        text-align: center;
-        font-style: italic;
-        color: #090224;
-        max-width: 600px;   
-        margin: 20px auto;
-        line-height: 1;
+      text-align: center;
+      font-style: italic;
+      color: #090224;
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1;
     }
 
-    /* NAVBAR */
+    /* ===== NAVBAR ===== */
     .navbar {
       position: fixed;
       width: 100%;
       top: 0;
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       padding: 30px 60px;
       z-index: 1000;
       transition: 0.3s;
     }
 
+    /* Fond flouté qui apparaît quand on scrolle (géré en JS) */
     .navbar.scrolled {
-      background: rgba(255,255,255,0.7);
+      background: rgba(250, 183, 254, 0.863);
       backdrop-filter: blur(10px);
     }
 
     .navbar a {
       margin-left: 40px;
       text-decoration: none;
-      color: #6b6b6b;
+      color: #fffefe;
       font-size: 14px;
       letter-spacing: 1px;
       transition: 0.3s;
@@ -79,7 +84,7 @@
       color: #000;
     }
 
-    /* HERO */
+    /* ===== SECTION HERO (page de garde) ===== */
     .hero {
       height: 100vh;
       display: flex;
@@ -87,12 +92,15 @@
       justify-content: center;
       align-items: center;
 
-      background-image: url("dataset/background.jpg"); /* ton image */
-      background-size: cover;       /* prend tout l'écran */
-      background-position: center;  /* centre l'image */
+      /* Image de fond */
+      background-image:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), /* overlay sombre pour lisibilité du texte */
+        url("dataset/image35.jpg");
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
 
-      color: white; /* texte visible sur image */
+      color: white;
       text-align: center;
     }
 
@@ -101,7 +109,16 @@
       font-size: 72px;
       font-weight: normal;
       margin-bottom: 30px;
-      animation: fadeUp 1s ease forwards;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: #e8cce8;
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      animation: fadeUp 1.1s ease forwards;
     }
 
     .tabs {
@@ -124,7 +141,7 @@
       transform: translateY(-2px);
     }
 
-    /* SECTIONS */
+    /* ===== SECTIONS GALERIE ===== */
     .section {
       padding: 120px 60px;
     }
@@ -135,7 +152,6 @@
       margin-bottom: 40px;
     }
 
-    /* GALERIE */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -155,7 +171,7 @@
       transform: scale(1.05);
     }
 
-    /* LIGHTBOX */
+    /* ===== LIGHTBOX (zoom image en plein écran) ===== */
     .lightbox {
       display: none;
       position: fixed;
@@ -185,7 +201,28 @@
       cursor: pointer;
     }
 
-    /* ANIMATION */
+    /* ===== BOUTON SON (flottant, en bas à droite) ===== */
+    .sound-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 1500;
+      background: rgba(255,255,255,0.85);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 18px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .sound-toggle:hover {
+      background: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Animation générique fondu + montée, utilisée dans le hero */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -197,7 +234,7 @@
       }
     }
 
-    /* RESPONSIVE */
+    /* ===== RESPONSIVE (mobile) ===== */
     @media(max-width: 768px) {
       h1 {
         font-size: 48px;
@@ -211,106 +248,108 @@
         padding: 80px 20px;
       }
     }
-
-    .hero-description {
-      font-size: 18px;
-      color: #e8cce8;
-      max-width: 500px;
-      text-align: center;
-      margin-bottom: 30px;
-      line-height: 1.6;
-      animation: fadeUp 1.1s ease forwards;
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- ===== NAVBAR : uniquement les liens de navigation ===== -->
   <div class="navbar" id="navbar">
-    <a href="#taglit" class="titre-animation">Taglit</a>
-    <a href="#ny" class="titre-animation">New-York</a>
-    <audio id="musique" autoplay loop muted>
-      <source src="dataset/musique.mp3" type="audio/mpeg">
-    </audio>
-
-<button onclick="toggleSon()">🔊 Activer le son</button>
-
-<script>
-function toggleSon() {
-  const musique = document.getElementById('musique');
-  musique.muted = !musique.muted;
-  if (!musique.muted) musique.play();
-}
-</script>
-    
+    <a href="#taglit">Taglit</a>
+    <a href="#ny">New-York</a>
   </div>
 
-  <!-- HERO -->
+  <!-- ===== MUSIQUE DE FOND =====
+       muted + autoplay = lecture silencieuse automatique
+       (les navigateurs bloquent l'autoplay avec le son activé sans action de l'utilisateur) -->
+  <audio id="musique" autoplay loop muted>
+    <source src="dataset/musique.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l'audio.
+  </audio>
+
+  <!-- Bouton flottant pour activer/couper le son -->
+  <button class="sound-toggle" onclick="toggleSon()" id="sound-btn">🔇 Activer le son</button>
+
+  <!-- ===== HERO / PAGE DE GARDE ===== -->
   <section class="hero">
+    <!-- Le titre principal utilise l'animation "monterTexte" (bas -> haut) -->
     <h1 class="titre-animation">Déborah Guedj</h1>
-    
+
     <div class="tabs">
       <a href="#taglit">Taglit</a>
       <a href="#ny">New-York</a>
     </div>
   </section>
 
-<!-- TAGLIT -->
+  <!-- ===== SECTION TAGLIT =====
+       Chemins corrigés : "/" au lieu de "\" (obligatoire pour le web) -->
   <section class="section" id="taglit">
     <h2>Taglit</h2>
     <div class="gallery-grid">
-      <img src="dataset\deadsea.webp" loading="lazy">
-      <img src="dataset\image31.jpg" loading="lazy">
-      <img src="dataset\image32.jpg" loading="lazy">
-      <img src="dataset\image33.jpg" loading="lazy">
-      <img src="dataset\image34.jpg" loading="lazy">
-      <img src="dataset\image35.jpg" loading="lazy">
-      <img src="dataset\image36.jpg" loading="lazy">
-      <img src="dataset\image37.jpg" loading="lazy">
-      <img src="dataset\image38.jpg" loading="lazy">
-      <img src="dataset\image39.jpg" loading="lazy">
-      <img src="dataset\image40.jpg" loading="lazy">
-      <img src="dataset\image41.jpg" loading="lazy">
-      <img src="dataset\image42.jpg" loading="lazy">
+      <img src="dataset/deadsea.webp" loading="lazy" alt="Mer Morte">
+      <img src="dataset/image31.jpg" loading="lazy" alt="Taglit 1">
+      <img src="dataset/image32.jpg" loading="lazy" alt="Taglit 2">
+      <img src="dataset/image33.jpg" loading="lazy" alt="Taglit 3">
+      <img src="dataset/image34.jpg" loading="lazy" alt="Taglit 4">
+      <img src="dataset/image35.jpg" loading="lazy" alt="Taglit 5">
+      <img src="dataset/image36.jpg" loading="lazy" alt="Taglit 6">
+      <img src="dataset/image37.jpg" loading="lazy" alt="Taglit 7">
+      <img src="dataset/image38.jpg" loading="lazy" alt="Taglit 8">
+      <img src="dataset/image39.jpg" loading="lazy" alt="Taglit 9">
+      <img src="dataset/image40.jpg" loading="lazy" alt="Taglit 10">
+      <img src="dataset/image41.jpg" loading="lazy" alt="Taglit 11">
+      <img src="dataset/image42.jpg" loading="lazy" alt="Taglit 12">
     </div>
   </section>
 
-  <!-- NEW YORK -->
+  <!-- ===== SECTION NEW YORK ===== -->
   <section class="section" id="ny">
     <h2>New-York</h2>
     <div class="gallery-grid">
-      <img src="dataset\image2.jpg" loading="lazy">
-      <img src="dataset\image3.jpg" loading="lazy">
-      <img src="dataset\image4.jpg" loading="lazy">
-      <img src="dataset\image5.jpg" loading="lazy">
-      <img src="dataset\image6.jpg" loading="lazy">
-      <img src="dataset\image7.jpg" loading="lazy">
-      <img src="dataset\image8.jpg" loading="lazy">
-      <img src="dataset\image9.jpg" loading="lazy">
-      <img src="dataset\image10.jpg" loading="lazy">
-      <img src="dataset\image11.jpg" loading="lazy">
-      <img src="dataset\image12.jpg" loading="lazy">
-      <img src="dataset\image13.jpg" loading="lazy">
-      <img src="dataset\image14.jpg" loading="lazy">
+      <img src="dataset/image2.jpg" loading="lazy" alt="New York 1">
+      <img src="dataset/image3.jpg" loading="lazy" alt="New York 2">
+      <img src="dataset/image4.jpg" loading="lazy" alt="New York 3">
+      <img src="dataset/image5.jpg" loading="lazy" alt="New York 4">
+      <img src="dataset/image6.jpg" loading="lazy" alt="New York 5">
+      <img src="dataset/image7.jpg" loading="lazy" alt="New York 6">
+      <img src="dataset/image8.jpg" loading="lazy" alt="New York 7">
+      <img src="dataset/image9.jpg" loading="lazy" alt="New York 8">
+      <img src="dataset/image10.jpg" loading="lazy" alt="New York 9">
+      <img src="dataset/image11.jpg" loading="lazy" alt="New York 10">
+      <img src="dataset/image12.jpg" loading="lazy" alt="New York 11">
+      <img src="dataset/image13.jpg" loading="lazy" alt="New York 12">
+      <img src="dataset/image14.jpg" loading="lazy" alt="New York 13">
     </div>
-  </section> 
+  </section>
 
-  <!-- LIGHTBOX -->
+  <!-- ===== LIGHTBOX (zoom plein écran au clic sur une image) ===== -->
   <div id="lightbox" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img">
   </div>
 
-  <!-- SCRIPT -->
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    // Navbar scroll effect
-    window.addEventListener("scroll", function() {
+    // --- Effet de fond flouté sur la navbar au scroll ---
+    window.addEventListener("scroll", function () {
       const navbar = document.getElementById("navbar");
       navbar.classList.toggle("scrolled", window.scrollY > 50);
     });
 
-    // Lightbox
+    // --- Gestion du bouton son ---
+    function toggleSon() {
+      const musique = document.getElementById('musique');
+      const btn = document.getElementById('sound-btn');
+      musique.muted = !musique.muted;
+      if (!musique.muted) {
+        musique.play();
+        btn.textContent = "🔊 Couper le son";
+      } else {
+        btn.textContent = "🔇 Activer le son";
+      }
+    }
+
+    // --- Lightbox : ouverture au clic sur une image de la galerie ---
     const images = document.querySelectorAll(".gallery-grid img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
@@ -323,10 +362,12 @@ function toggleSon() {
       });
     });
 
+    // Fermeture via la croix
     closeBtn.addEventListener("click", () => {
       lightbox.style.display = "none";
     });
 
+    // Fermeture en cliquant en dehors de l'image (sur le fond noir)
     lightbox.addEventListener("click", (e) => {
       if (e.target !== lightboxImg) {
         lightbox.style.display = "none";
