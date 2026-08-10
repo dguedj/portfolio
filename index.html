@@ -2,7 +2,24 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mon Portfolio</title>
+  <style>
+  .titre-animation {
+    animation: monterTexte 1.5s ease-out forwards;
+    position: relative;
+  }
+  
+  @keyframes monterTexte {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  </style>
+  <title class="titre-animation">Mon Portfolio</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
