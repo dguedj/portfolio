@@ -67,11 +67,13 @@
 
             padding: 0 60px;
 
-            background: rgba(228, 222, 222, 0.5);
-            backdrop-filter: blur(12px);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                url('bck.jpg');
 
             z-index: 1000;
         }
+
 
 
         .nav-links {
@@ -690,14 +692,25 @@
         ================================================== */
 
         footer {
-            padding: 30px;
-
-            text-align: center;
-
-            color: #11032d;
-
-            border-top: 1px solid #390445;
+                padding: 30px;
+                text-align: center;
+                color: #11032d;
+                background-image: 
+                    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                    url('backg.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
         }
+
+            .footer-logo {
+                width: 100px;      /* ajuste selon tes besoins */
+                height: auto;
+                margin-bottom: 15px;  /* espace entre l'image et le texte en dessous */
+                display: block;
+                margin-left: auto;
+                margin-right: auto;   /* centre l'image */
+            }
 
 
         /* ==================================================
@@ -1175,9 +1188,7 @@
     ================================================== -->
 
     <footer>
-
-        © 2026 — Déborah Guedj
-
+            <p>© 2026 — Déborah Guedj</p>
     </footer>
 
 
